@@ -1,0 +1,15 @@
+Pretraining mit ERA5 - 
+Finetuning mit Satelliten
+
+periode: 2010 - 2020
+pytorch
+Features: precip, pot evap., 
+
+
+Wolfi:
+ERA5-Land daten paar 1000 pxl (über Europa verteilt)  - variablen mit höchster korrelation
+
+validation:
+gap classification for validation: 1/2, 3+ tage (wolfi)
+discuss summer/winter performance
+shap values

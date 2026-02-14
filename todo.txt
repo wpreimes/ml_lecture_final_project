@@ -1,0 +1,21 @@
+Task1
+- EDA: Gap analysis. How many data points are missing, 
+    what are their characteristics. Seasonally missing or randomly missing? (Max)
+Task2 - Training strategy / preprocessing (Michael)
+- Training: Pretrained network? (Michael), train/test strategy (basierend auf EDA)
+- Apply gaps to ERA5-Soil moisture time series (Michael)
+Task 3 - Basline Models (Wolfi)
+- Define basline models (linreg, ffill, DCT-PLS) -- Wolfi
+Task 4 & Task 5 (alle)
+- Try different covariate combinations
+- Hyperparameter Tuning
+Task 6 - Evaluation (alle)
+- Check with prev. dropped values, qualitative and quantitive
+- Check against In Situ data
+Task 7 (Wolfi)
+- Try to apply the model to satellite data to predict SM in real data gaps
+
+
+
+Nächster Termin: Mittwoch
+
