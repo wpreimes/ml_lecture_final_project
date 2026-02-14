@@ -1,17 +1,13 @@
 import numpy as np
 np.random.seed(123)
 import pandas as pd
-from glob import glob
 import os
 from pathlib import Path
 import re
 from matplotlib.lines import Line2D
-import matplotlib.pyplot as plt
 import cartopy.crs as ccrs
 import cartopy.feature as cfeature
-from tqdm.notebook import tqdm
 from glob import glob
-from pygeogrids.grids import BasicGrid
 
 
 original_vars = ['lai_hv', 'lai_lv', 'tp', 'd2m', 'skt', 'stl1', 'stl2', 'stl3', 'stl4', 't2m', 'evabs', 'evaow', 'evatc', 'evavt', 'pev', 'ro', 'es', 'ssro', 'sro']
@@ -121,13 +117,6 @@ class ReanalysisReader:
             lons.append(lon)
             lats.append(lat)
 
-        self.grid = BasicGrid(lons, lats, gpis=list(range(len(lons))))
-
-    def cut_to_k_nearest(self, ref_lon, ref_lat, k=100):
-        gpis, distances = self.grid.find_k_nearest_gpi(ref_lon, ref_lat, max_dist=np.inf, k=k)
-        self.grid = self.grid.subgrid_from_gpis(gpis)
-        self.files = self.files[self.grid.activegpis]
-
     def parse_lon_lat(self, filename: str) -> tuple[float, float]:
         pattern = r"lon=(-?\d+\.?\d*)_lat=(-?\d+\.?\d*)"
         match = re.search(pattern, filename)
@@ -175,31 +164,7 @@ def _load_data(location):
     
     return insitu, reanalysis, satellite, float(lat), float(lon)
 
-"""
-class TqdmEpochProgress(Callback):
-    def on_train_begin(self, logs=None):
-        self.epochs = self.params["epochs"]
-        self.pbar = tqdm(total=self.epochs, desc="Training")
-
-    def on_epoch_end(self, epoch, logs=None):
-        self.pbar.update(1)
-        if logs:
-            self.pbar.set_postfix({
-                "loss": f"{logs['loss']:.4f}",
-                "val_loss": f"{logs.get('val_loss', float('nan')):.4f}"
-            })
-
-    def on_train_end(self, logs=None):
-        self.pbar.close()
-"""
-
 
 def min_max_scale(s: pd.Series, out_min: float, out_max: float) -> pd.Series:
     s_min, s_max = s.min(), s.max()
     return out_min + (s - s_min) * (out_max - out_min) / (s_max - s_min)
-
-
-if __name__ == '__main__':
-    reader = ReanalysisReader()
-    reader.cut_to_k_nearest(18, 48, 10)
-    print(len(reader.files))
