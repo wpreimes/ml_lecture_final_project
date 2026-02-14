@@ -2,12 +2,13 @@ name: ml_lecture
 channels:
 - conda-forge
 dependencies:
+    - python=3.12
     - numpy
     - pandas
     - matplotlib
     - cartopy
     - pytorch
-    - sklearn
+    - scikit-learn
     - seaborn
     - scipy
     - statsmodels
@@ -15,4 +16,5 @@ dependencies:
     - pip:
         - pytesmo
         - ipywidgets
+        - tqdm  
         
