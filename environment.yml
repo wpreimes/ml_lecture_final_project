@@ -8,7 +8,7 @@ dependencies:
     - matplotlib
     - cartopy
     - pytorch
-    - scikit-learn
+    - scikit-learn=1.8.0
     - seaborn
     - scipy
     - statsmodels
