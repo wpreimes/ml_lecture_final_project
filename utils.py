@@ -37,10 +37,7 @@ pretty_vars = [
 _l = Line2D([], [], linestyle='none')
 
 
-def _marker_on_map(lat, lon, ax):
-    #fig = plt.figure(figsize=(5, 4))
-    #ax = plt.axes(projection=ccrs.PlateCarree())
-
+def _marker_on_map(lat, lon, ax, name=None, other_points=None):
     # Europe view
     ax.set_extent([-25, 45, 34, 72], crs=ccrs.PlateCarree())
 
@@ -50,6 +47,17 @@ def _marker_on_map(lat, lon, ax):
     ax.add_feature(cfeature.COASTLINE, linewidth=1)
     ax.add_feature(cfeature.BORDERS, linestyle=":", linewidth=0.8)
 
+    other_points = other_points or []
+    for (_lon, _lat) in other_points:
+            ax.plot(
+            _lon, _lat,
+            marker=".",
+            color="black",
+            markersize=8,
+            markeredgecolor="black",
+            transform=ccrs.PlateCarree(),
+        )
+        
     # Big marker
     ax.plot(
         lon, lat,
@@ -58,19 +66,19 @@ def _marker_on_map(lat, lon, ax):
         markersize=14,
         markeredgecolor="black",
         transform=ccrs.PlateCarree(),
-        zorder=5
     )
 
-    # Optional label
+        # Optional label
     ax.text(
-        lon + 1, lat + 1,
-        f"{lat:.2f}, {lon:.2f}",
+        lon + 1, lat + 3,
+        f"y={lat:.2f}, x={lon:.2f}",
         transform=ccrs.PlateCarree(),
         fontsize=10,
         bbox=dict(facecolor="white", alpha=0.7, boxstyle="round")
     )
-
-    ax.set_title("Location", fontsize=14)
+    
+        
+    ax.set_title(name, fontsize=14)
     return ax
 
 
@@ -136,14 +144,22 @@ class ReanalysisReader:
 def _load_data(location):
     start = '2015-01-01'
     end = '2020-12-31'
-    path = Path(glob(f"data/{location}_*")[0])
 
-    s = os.path.basename(path)
-    pattern = r"_lat=([-+]?\d*\.?\d+)_lon=([-+]?\d*\.?\d+)"
-    match = re.search(pattern, s)
-    if not match:
-        raise ValueError("String does not match expected format")
-    lat, lon = match.groups()
+    pattern = r"(.*?)_lat=([-+]?\d*\.?\d+)_lon=([-+]?\d*\.?\d+)"
+    other_coords = []
+
+    for fname in os.listdir("data"):
+        match = re.search(pattern, fname)
+        name = match.group(1)
+        _lat  = float(match.group(2))
+        _lon  = float(match.group(3))
+        if name == location:
+            lat, lon = _lat, _lon
+            path = Path(f"data/{fname}")
+        else:
+            other_coords.append((_lon, _lat))
+            
+    path = Path(glob(f"data/{location}_*")[0])
 
     insitu = pd.read_csv(path / 'insitu.csv')
     insitu['date_time'] = pd.to_datetime(insitu['date_time'])
@@ -162,7 +178,7 @@ def _load_data(location):
     satellite = satellite[['sm']].rename(columns={'sm': 'satellite SM'})
     satellite = satellite.loc[start:end, :]
     
-    return insitu, reanalysis, satellite, float(lat), float(lon)
+    return insitu, reanalysis, satellite, float(lat), float(lon), other_coords
 
 
 def min_max_scale(s: pd.Series, out_min: float, out_max: float) -> pd.Series:
