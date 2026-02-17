@@ -8,6 +8,7 @@ from matplotlib.lines import Line2D
 import cartopy.crs as ccrs
 import cartopy.feature as cfeature
 from glob import glob
+import requests
 
 
 original_vars = ['lai_hv', 'lai_lv', 'tp', 'd2m', 'skt', 'stl1', 'stl2', 'stl3', 'stl4', 't2m', 'evabs', 'evaow', 'evatc', 'evavt', 'pev', 'ro', 'es', 'ssro', 'sro']
@@ -118,12 +119,12 @@ class ReanalysisReader:
         self.path = Path(path)
         self.files = np.array(sorted(glob(str(self.path))))
         
-        lons = []
-        lats = []
+        self.lons = []
+        self.lats = []
         for f in self.files:
             lon, lat = self.parse_lon_lat(os.path.basename(f))
-            lons.append(lon)
-            lats.append(lat)
+            self.lons.append(lon)
+            self.lats.append(lat)
 
     def parse_lon_lat(self, filename: str) -> tuple[float, float]:
         pattern = r"lon=(-?\d+\.?\d*)_lat=(-?\d+\.?\d*)"
@@ -181,6 +182,42 @@ def _load_data(location):
     return insitu, reanalysis, satellite, float(lat), float(lon), other_coords
 
 
+def download_model_params():
+    """
+    Downloads all files from the model_params folder in the GitHub repo
+    and saves them to a 'model_params' folder next to this notebook.
+    """
+    # GitHub API URL for the folder contents
+    api_url = "https://api.github.com/repos/wpreimes/ml_lecture_final_project/contents/model_params"
+    
+    # Output folder: same directory as the notebook
+    notebook_dir = os.getcwd()
+    output_dir = os.path.join(notebook_dir, "model_params")
+    os.makedirs(output_dir, exist_ok=True)
+    
+    # Get list of files from GitHub API
+    response = requests.get(api_url)
+    response.raise_for_status()
+    files = response.json()
+    
+    print(f"Found {len(files)} files. Downloading to '{output_dir}'...")
+    
+    for file_info in files:
+        if file_info["type"] == "file":
+            filename = file_info["name"]
+            download_url = file_info["download_url"]
+            
+            file_response = requests.get(download_url)
+            file_response.raise_for_status()
+            
+            save_path = os.path.join(output_dir, filename)
+            with open(save_path, "wb") as f:
+                f.write(file_response.content)
+            
+            print(f"  ✓ {filename}")
+    
+    print(f"\nDone! All files saved to: {output_dir}")
+    
 def min_max_scale(s: pd.Series, out_min: float, out_max: float) -> pd.Series:
     s_min, s_max = s.min(), s.max()
     return out_min + (s - s_min) * (out_max - out_min) / (s_max - s_min)
