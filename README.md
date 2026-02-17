@@ -1,4 +1,5 @@
-You can view a static version (with non-interactive widgets) of the notebook at https://wpreimes.github.io/ml_lecture_final_project/FinalProject.html
+# HTML Version (static)
+You can view a static version (with non-interactive widgets) of the notebook at <br> https://wpreimes.github.io/ml_lecture_final_project/FinalProject.html
 
 # Setup
 1) Clone this repository `git clone git@github.com:wpreimes/ml_lecture_final_project.git`
