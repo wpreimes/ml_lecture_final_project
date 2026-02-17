@@ -1,0 +1,43 @@
+variable,key,data
+clay_fraction,val,22.0
+clay_fraction,depth_from,0.0
+clay_fraction,depth_to,0.3
+climate_KG,val,Dfb
+climate_insitu,val,unknown
+elevation,val,272.859
+frm_class,val,not representative
+frm_nobs,val,1747.0
+frm_snr,val,-3.6131327
+idx,val,1032.0
+instrument,val,SPADE-Time-Domain-Transmissivity-A
+instrument,depth_from,0.05
+instrument,depth_to,0.05
+lat,val,48.15426
+latitude,val,48.15426
+lc_2000,val,10
+lc_2005,val,10
+lc_2010,val,10
+lc_insitu,val,unknown
+lon,val,15.14975
+longitude,val,15.14975
+network,val,HOAL
+organic_carbon,val,0.74
+organic_carbon,depth_from,0.0
+organic_carbon,depth_to,0.3
+sand_fraction,val,41.0
+sand_fraction,depth_from,0.0
+sand_fraction,depth_to,0.3
+saturation,val,0.43
+saturation,depth_from,0.0
+saturation,depth_to,0.3
+silt_fraction,val,37.0
+silt_fraction,depth_from,0.0
+silt_fraction,depth_to,0.3
+station,val,Hoal-26
+timerange_from,val,2013-12-12 15:00:00
+timerange_to,val,2019-12-31 02:00:00
+tsw,val,bulk
+tsw.1,val,bulk
+variable,val,soil_moisture
+variable,depth_from,0.05
+variable,depth_to,0.05

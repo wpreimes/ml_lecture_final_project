@@ -1,0 +1,43 @@
+variable,key,data
+clay_fraction,val,22.8
+clay_fraction,depth_from,0.05
+clay_fraction,depth_to,0.05
+climate_KG,val,Cfb
+climate_insitu,val,unknown
+elevation,val,337.0
+frm_class,val,very representative
+frm_nobs,val,15694.0
+frm_snr,val,5.835426
+idx,val,2992.0
+instrument,val,ThetaProbe-ML2X
+instrument,depth_from,0.05
+instrument,depth_to,0.05
+lat,val,43.4417
+latitude,val,43.4417
+lc_2000,val,10
+lc_2005,val,10
+lc_2010,val,10
+lc_insitu,val,unknown
+lon,val,1.88
+longitude,val,1.88
+network,val,SMOSMANIA
+organic_carbon,val,1.15
+organic_carbon,depth_from,0.05
+organic_carbon,depth_to,0.05
+sand_fraction,val,43.5
+sand_fraction,depth_from,0.05
+sand_fraction,depth_to,0.05
+saturation,val,0.44
+saturation,depth_from,0.05
+saturation,depth_to,0.05
+silt_fraction,val,33.7
+silt_fraction,depth_from,0.05
+silt_fraction,depth_to,0.05
+station,val,SaintFelixdeLauragais
+timerange_from,val,2007-01-07 05:00:00
+timerange_to,val,2024-01-01 00:00:00
+tsw,val,bulk
+tsw.1,val,bulk
+variable,val,soil_moisture
+variable,depth_from,0.05
+variable,depth_to,0.05

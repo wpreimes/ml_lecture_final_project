@@ -1,0 +1,36 @@
+variable,key,data
+clay_fraction,val,21.0
+clay_fraction,depth_from,0.0
+clay_fraction,depth_to,0.3
+climate_KG,val,Cfb
+climate_insitu,val,unknown
+elevation,val,66.0
+frm_class,val,undeducible
+instrument,val,TRIME-ES-P2
+instrument,depth_from,0.25
+instrument,depth_to,0.25
+latitude,val,50.39428
+lc_2000,val,210
+lc_2005,val,210
+lc_2010,val,210
+lc_insitu,val,unknown
+longitude,val,7.60313
+network,val,BFG_Nw
+organic_carbon,val,0.86
+organic_carbon,depth_from,0.0
+organic_carbon,depth_to,0.3
+sand_fraction,val,39.0
+sand_fraction,depth_from,0.0
+sand_fraction,depth_to,0.3
+saturation,val,0.43
+saturation,depth_from,0.0
+saturation,depth_to,0.3
+silt_fraction,val,40.0
+silt_fraction,depth_from,0.0
+silt_fraction,depth_to,0.3
+station,val,BFG-Niederwerth-1-weighable
+timerange_from,val,1996-06-30 22:00:00
+timerange_to,val,2021-07-06 08:00:00
+variable,val,soil_moisture
+variable,depth_from,0.25
+variable,depth_to,0.25

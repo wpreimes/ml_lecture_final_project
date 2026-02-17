@@ -1,0 +1,43 @@
+variable,key,data
+clay_fraction,val,49.0
+clay_fraction,depth_from,0.0
+clay_fraction,depth_to,0.3
+climate_KG,val,BSk
+climate_insitu,val,unknown
+elevation,val,-99.9
+frm_class,val,very representative
+frm_nobs,val,11217.0
+frm_snr,val,5.347918
+idx,val,1916.0
+instrument,val,Stevens-Hydra-Probe
+instrument,depth_from,0.0
+instrument,depth_to,0.05
+lat,val,41.20548
+latitude,val,41.20548
+lc_2000,val,20
+lc_2005,val,20
+lc_2010,val,20
+lc_insitu,val,unknown
+lon,val,-5.41558
+longitude,val,-5.41558
+network,val,REMEDHUS
+organic_carbon,val,0.87
+organic_carbon,depth_from,0.0
+organic_carbon,depth_to,0.3
+sand_fraction,val,19.0
+sand_fraction,depth_from,0.0
+sand_fraction,depth_to,0.3
+saturation,val,0.5
+saturation,depth_from,0.0
+saturation,depth_to,0.3
+silt_fraction,val,32.0
+silt_fraction,depth_from,0.0
+silt_fraction,depth_to,0.3
+station,val,LasEritas
+timerange_from,val,2012-01-12 18:00:00
+timerange_to,val,2025-01-01 00:00:00
+tsw,val,bulk
+tsw.1,val,bulk
+variable,val,soil_moisture
+variable,depth_from,0.0
+variable,depth_to,0.05

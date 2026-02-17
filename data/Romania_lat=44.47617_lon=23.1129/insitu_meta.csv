@@ -1,0 +1,43 @@
+variable,key,data
+clay_fraction,val,19.0
+clay_fraction,depth_from,0.0
+clay_fraction,depth_to,0.3
+climate_KG,val,Cfa
+climate_insitu,val,unknown
+elevation,val,313.0
+frm_class,val,very representative
+frm_nobs,val,6593.0
+frm_snr,val,6.0527253
+idx,val,2063.0
+instrument,val,5TM
+instrument,depth_from,0.0
+instrument,depth_to,0.05
+lat,val,44.47617
+latitude,val,44.47617
+lc_2000,val,190
+lc_2005,val,190
+lc_2010,val,190
+lc_insitu,val,unknown
+lon,val,23.1129
+longitude,val,23.1129
+network,val,RSMN
+organic_carbon,val,0.99
+organic_carbon,depth_from,0.0
+organic_carbon,depth_to,0.3
+sand_fraction,val,37.0
+sand_fraction,depth_from,0.0
+sand_fraction,depth_to,0.3
+saturation,val,0.44
+saturation,depth_from,0.0
+saturation,depth_to,0.3
+silt_fraction,val,44.0
+silt_fraction,depth_from,0.0
+silt_fraction,depth_to,0.3
+station,val,Bacles
+timerange_from,val,2014-05-20 13:00:00
+timerange_to,val,2022-08-31 02:00:00
+tsw,val,bulk
+tsw.1,val,bulk
+variable,val,soil_moisture
+variable,depth_from,0.0
+variable,depth_to,0.05
