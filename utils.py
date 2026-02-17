@@ -182,41 +182,42 @@ def _load_data(location):
     return insitu, reanalysis, satellite, float(lat), float(lon), other_coords
 
 
-def download_model_params():
+def download_from_git(folder="model_params"):
     """
-    Downloads all files from the model_params folder in the GitHub repo
-    and saves them to a 'model_params' folder next to this notebook.
+    Recursively downloads all files from a folder in the GitHub repo
+    and saves them preserving the directory structure.
     """
-    # GitHub API URL for the folder contents
-    api_url = "https://api.github.com/repos/wpreimes/ml_lecture_final_project/contents/model_params"
-    
-    # Output folder: same directory as the notebook
     notebook_dir = os.getcwd()
-    output_dir = os.path.join(notebook_dir, "model_params")
-    os.makedirs(output_dir, exist_ok=True)
-    
-    # Get list of files from GitHub API
-    response = requests.get(api_url)
-    response.raise_for_status()
-    files = response.json()
-    
-    print(f"Found {len(files)} files. Downloading to '{output_dir}'...")
-    
-    for file_info in files:
-        if file_info["type"] == "file":
-            filename = file_info["name"]
-            download_url = file_info["download_url"]
-            
-            file_response = requests.get(download_url)
-            file_response.raise_for_status()
-            
-            save_path = os.path.join(output_dir, filename)
-            with open(save_path, "wb") as f:
-                f.write(file_response.content)
-            
-            print(f"  ✓ {filename}")
-    
+
+    def download_folder(api_url, local_dir):
+        os.makedirs(local_dir, exist_ok=True)
+
+        response = requests.get(api_url)
+        response.raise_for_status()
+        items = response.json()
+
+        print(f"Found {len(items)} items in '{local_dir}'...")
+
+        for item in items:
+            if item["type"] == "file":
+                file_response = requests.get(item["download_url"])
+                file_response.raise_for_status()
+
+                save_path = os.path.join(local_dir, item["name"])
+                with open(save_path, "wb") as f:
+                    f.write(file_response.content)
+                print(f"  ✓ {item['path']}")
+
+            elif item["type"] == "dir":
+                sub_local_dir = os.path.join(local_dir, item["name"])
+                download_folder(item["url"], sub_local_dir)
+
+    root_api_url = f"https://api.github.com/repos/wpreimes/ml_lecture_final_project/contents/{folder}"
+    output_dir = os.path.join(notebook_dir, folder)
+
+    download_folder(root_api_url, output_dir)
     print(f"\nDone! All files saved to: {output_dir}")
+    
     
 def min_max_scale(s: pd.Series, out_min: float, out_max: float) -> pd.Series:
     s_min, s_max = s.min(), s.max()
